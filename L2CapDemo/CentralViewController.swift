@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import ExternalAccessory
 
 class CentralViewController: UIViewController {
     
@@ -17,6 +18,10 @@ class CentralViewController: UIViewController {
     private var peripheral: CBPeripheral?
     private var channel: CBL2CAPChannel?
     private var characteristic: CBCharacteristic?
+    
+    private var queueQueue = DispatchQueue(label: "queue queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    
+    private var outputData = Data()
     
     var central:CBCentralManager!
     
@@ -31,13 +36,34 @@ class CentralViewController: UIViewController {
     }
     
     @IBAction func sendTextTapped(_ sender: UIButton) {
-        guard let ostream = self.channel?.outputStream, let text = self.inputText.text, let data = text.data(using: .utf8)  else{
+        var lngStr = "1234567890"
+        for _ in 1...10 {lngStr = lngStr + lngStr}
+        let data = lngStr.data(using: .utf8)!
+        
+        self.queue(data:data)
+    }
+    
+    private func queue(data: Data) {
+        queueQueue.sync  {
+            self.outputData.append(data)
+        }
+        self.send()
+    }
+    
+    private func send() {
+        
+        guard let ostream = self.channel?.outputStream, !self.outputData.isEmpty, ostream.hasSpaceAvailable  else{
             return
         }
-        
-        let bytesWritten =  data.withUnsafeBytes { ostream.write($0, maxLength: data.count) }
+        let bytesWritten =  outputData.withUnsafeBytes { ostream.write($0, maxLength: self.outputData.count) }
         print("bytesWritten = \(bytesWritten)")
-        
+        queueQueue.sync {
+            if bytesWritten < outputData.count {
+                outputData = outputData.advanced(by: bytesWritten)
+            } else {
+                outputData.removeAll()
+            }
+        }
     }
     
     func startScan() {
@@ -159,6 +185,7 @@ extension CentralViewController: StreamDelegate {
             print("Bytes are available")
         case Stream.Event.hasSpaceAvailable:
             print("Space is available")
+            self.send()
         case Stream.Event.errorOccurred:
             print("Stream error")
         default:
