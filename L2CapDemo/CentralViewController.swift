@@ -14,10 +14,17 @@ class CentralViewController: UIViewController {
     
     @IBOutlet weak var scanSwitch: UISwitch!
     @IBOutlet weak var inputText: UITextField!
+    @IBOutlet weak var byteLabel: UILabel!
     
     private var peripheral: CBPeripheral?
     private var channel: CBL2CAPChannel?
     private var characteristic: CBCharacteristic?
+    
+    private var bytesSent = 0 {
+        didSet {
+            self.byteLabel.text = "Bytes sent = \(self.bytesSent)"
+        }
+    }
     
     private var queueQueue = DispatchQueue(label: "queue queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     
@@ -29,6 +36,7 @@ class CentralViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.central = CBCentralManager(delegate: self, queue: nil)
+        self.bytesSent = 0
     }
     
     @IBAction func scanSwitched(_ sender: UISwitch) {
@@ -38,9 +46,10 @@ class CentralViewController: UIViewController {
     @IBAction func sendTextTapped(_ sender: UIButton) {
         var lngStr = "1234567890"
         for _ in 1...10 {lngStr = lngStr + lngStr}
+        for _ in 1...10 {
         let data = lngStr.data(using: .utf8)!
-        
         self.queue(data:data)
+        }
     }
     
     private func queue(data: Data) {
@@ -57,6 +66,7 @@ class CentralViewController: UIViewController {
         }
         let bytesWritten =  outputData.withUnsafeBytes { ostream.write($0, maxLength: self.outputData.count) }
         print("bytesWritten = \(bytesWritten)")
+        self.bytesSent+=bytesWritten
         queueQueue.sync {
             if bytesWritten < outputData.count {
                 outputData = outputData.advanced(by: bytesWritten)

@@ -21,12 +21,20 @@ class PeripheralViewController: UIViewController {
     
     var peripheralManager: CBPeripheralManager!
     var subscribedCentrals = [CBCharacteristic:[CBCentral]]()
+    
+    private var bytesReceived = 0 {
+           didSet {
+            DispatchQueue.main.async {
+               self.outputLabel.text = "Bytes received = \(self.bytesReceived)"
+            }
+           }
+       }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
-      
+        self.bytesReceived = 0
     }
     
     @IBAction func advertiseSwitched(_ sender: UISwitch) {
@@ -100,10 +108,23 @@ extension PeripheralViewController: CBPeripheralManagerDelegate {
             print("Opened channel \(channel)")
             channel.inputStream.delegate = self
             channel.outputStream.delegate = self
-            channel.inputStream.schedule(in: RunLoop.current, forMode: .default)
-            channel.outputStream.schedule(in: RunLoop.current, forMode: .default)
+            channel.inputStream.schedule(in: RunLoop.current, forMode: .common)
+            channel.outputStream.schedule(in: RunLoop.current, forMode: .common)
             channel.inputStream.open()
             channel.outputStream.open()
+        }
+    }
+    
+    func readBytes() {
+        if let iStream = channel?.inputStream {
+            let bufLength = 1024
+            let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufLength)
+            let bytesRead = iStream.read(buffer, maxLength: bufLength)
+            print("bytesRead = \(bytesRead)")
+            self.bytesReceived += bytesRead
+            if iStream.hasBytesAvailable {
+                self.readBytes()
+            }
         }
     }
     
@@ -119,16 +140,7 @@ extension PeripheralViewController: StreamDelegate {
             print("End Encountered")
         case Stream.Event.hasBytesAvailable:
             print("Bytes are available")
-            if let iStream = aStream as? InputStream {
-                let bufLength = 1024
-                let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufLength)
-                let bytesRead = iStream.read(buffer, maxLength: bufLength)
-                print("bytesRead = \(bytesRead)")
-                if let string = String(bytesNoCopy: buffer, length: bytesRead, encoding: .utf8, freeWhenDone: false) {
-                    print("Received data: \(string)")
-                    self.outputLabel.text = string
-                }
-            }
+            self.readBytes()
         case Stream.Event.hasSpaceAvailable:
             print("Space is available")
         case Stream.Event.errorOccurred:
