@@ -23,13 +23,13 @@ class PeripheralViewController: UIViewController {
     var subscribedCentrals = [CBCharacteristic:[CBCentral]]()
     
     private var bytesReceived = 0 {
-           didSet {
+        didSet {
             DispatchQueue.main.async {
-               self.outputLabel.text = "Bytes received = \(self.bytesReceived)"
+                self.outputLabel.text = "Bytes received = \(self.bytesReceived)"
             }
-           }
-       }
-
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -54,7 +54,7 @@ class PeripheralViewController: UIViewController {
         self.advertiseSwitch.isOn = false
         self.peripheralManager.stopAdvertising()
     }
-
+    
 }
 
 
@@ -91,7 +91,7 @@ extension PeripheralViewController: CBPeripheralManagerDelegate {
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         if let psm = self.channelPSM, let data = "\(psm)".data(using: .utf8) {
             request.value = characteristic.value
-             print("Respond \(data)")
+            print("Respond \(data)")
             self.peripheralManager.respond(to: request, withResult: .success)
         } else {
             self.peripheralManager.respond(to: request, withResult: .unlikelyError)
@@ -115,16 +115,14 @@ extension PeripheralViewController: CBPeripheralManagerDelegate {
         }
     }
     
-    func readBytes() {
-        if let iStream = channel?.inputStream {
-            let bufLength = 1024
-            let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufLength)
-            let bytesRead = iStream.read(buffer, maxLength: bufLength)
-            print("bytesRead = \(bytesRead)")
-            self.bytesReceived += bytesRead
-            if iStream.hasBytesAvailable {
-                self.readBytes()
-            }
+    func readBytes(from stream: InputStream) {
+        let bufLength = 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufLength)
+        let bytesRead = stream.read(buffer, maxLength: bufLength)
+        print("bytesRead = \(bytesRead)")
+        self.bytesReceived += bytesRead
+        if stream.hasBytesAvailable {
+            self.readBytes(from: stream)
         }
     }
     
@@ -140,7 +138,7 @@ extension PeripheralViewController: StreamDelegate {
             print("End Encountered")
         case Stream.Event.hasBytesAvailable:
             print("Bytes are available")
-            self.readBytes()
+            self.readBytes(from: aStream as! InputStream)
         case Stream.Event.hasSpaceAvailable:
             print("Space is available")
         case Stream.Event.errorOccurred:
