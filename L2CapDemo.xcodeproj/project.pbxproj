@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB3A7DEB23A3411E0086C9ED /* L2Cap in Frameworks */ = {isa = PBXBuildFile; productRef = BB3A7DEA23A3411E0086C9ED /* L2Cap */; };
 		BB696ECD21F016D100116608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ECC21F016D100116608 /* AppDelegate.swift */; };
 		BB696ECF21F016D100116608 /* CentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ECE21F016D100116608 /* CentralViewController.swift */; };
 		BB696ED121F016D100116608 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ED021F016D100116608 /* PeripheralViewController.swift */; };
@@ -28,6 +29,7 @@
 		BB696EDA21F016D200116608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB696EE021F0180700116608 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB696EE221F035E400116608 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		BBD86D2A2324E81300346105 /* L2CapDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = L2CapDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3A7DEB23A3411E0086C9ED /* L2Cap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +63,7 @@
 		BB696ECB21F016D100116608 /* L2CapDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BBD86D2A2324E81300346105 /* L2CapDemo.entitlements */,
 				BB696ECC21F016D100116608 /* AppDelegate.swift */,
 				BB696ECE21F016D100116608 /* CentralViewController.swift */,
 				BB696ED021F016D100116608 /* PeripheralViewController.swift */,
@@ -89,6 +93,9 @@
 			dependencies = (
 			);
 			name = L2CapDemo;
+			packageProductDependencies = (
+				BB3A7DEA23A3411E0086C9ED /* L2Cap */,
+			);
 			productName = L2CapDemo;
 			productReference = BB696EC921F016D100116608 /* L2CapDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -105,6 +112,7 @@
 				TargetAttributes = {
 					BB696EC821F016D100116608 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -117,6 +125,9 @@
 				Base,
 			);
 			mainGroup = BB696EC021F016D100116608;
+			packageReferences = (
+				BB3A7DE923A3411E0086C9ED /* XCRemoteSwiftPackageReference "L2Cap" */,
+			);
 			productRefGroup = BB696ECA21F016D100116608 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -294,6 +305,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = L2CapDemo/L2CapDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UPP93EJ3U2;
 				INFOPLIST_FILE = L2CapDemo/Info.plist;
@@ -301,9 +313,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemo3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -312,6 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = L2CapDemo/L2CapDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UPP93EJ3U2;
 				INFOPLIST_FILE = L2CapDemo/Info.plist;
@@ -319,9 +332,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemo3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -348,6 +361,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB3A7DE923A3411E0086C9ED /* XCRemoteSwiftPackageReference "L2Cap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paulw11/L2Cap.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB3A7DEA23A3411E0086C9ED /* L2Cap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3A7DE923A3411E0086C9ED /* XCRemoteSwiftPackageReference "L2Cap" */;
+			productName = L2Cap;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BB696EC121F016D100116608 /* Project object */;
 }
