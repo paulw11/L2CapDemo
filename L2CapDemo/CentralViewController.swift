@@ -64,10 +64,7 @@ class CentralViewController: UIViewController {
         guard let connection = self.connection else {
             return
         }
-        var lngStr = "1234567890"
-        for _ in 1...10 {lngStr = lngStr + lngStr}
-       for _ in 1...10 {
-        let data = lngStr.data(using: .utf8)!
+        if let text = self.inputText.text, let data = text.data(using: .utf8) {
             connection.send(data: data)
         }
     }

@@ -34,6 +34,9 @@ class PeripheralViewController: UIViewController {
             self.connection?.receiveCallback = { (connection, data) in
                 DispatchQueue.main.async {
                     self.bytesReceived += data.count
+                    if let str = String(data: data, encoding: .utf8) {
+                        self.outputLabel.text = str
+                    }
                 }
             }
         })
