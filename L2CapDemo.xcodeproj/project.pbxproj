@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB3A7DEB23A3411E0086C9ED /* L2Cap in Frameworks */ = {isa = PBXBuildFile; productRef = BB3A7DEA23A3411E0086C9ED /* L2Cap */; };
+		BB43BB5823A9CE7D005F67A4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BB43BB5723A9CE7D005F67A4 /* README.md */; };
 		BB696ECD21F016D100116608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ECC21F016D100116608 /* AppDelegate.swift */; };
 		BB696ECF21F016D100116608 /* CentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ECE21F016D100116608 /* CentralViewController.swift */; };
 		BB696ED121F016D100116608 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696ED021F016D100116608 /* PeripheralViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB43BB5723A9CE7D005F67A4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BB696EC921F016D100116608 /* L2CapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = L2CapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB696ECC21F016D100116608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB696ECE21F016D100116608 /* CentralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		BB696EC021F016D100116608 = {
 			isa = PBXGroup;
 			children = (
+				BB43BB5723A9CE7D005F67A4 /* README.md */,
 				BB696ECB21F016D100116608 /* L2CapDemo */,
 				BB696ECA21F016D100116608 /* Products */,
 			);
@@ -144,6 +147,7 @@
 			files = (
 				BB696ED921F016D200116608 /* LaunchScreen.storyboard in Resources */,
 				BB696ED621F016D200116608 /* Assets.xcassets in Resources */,
+				BB43BB5823A9CE7D005F67A4 /* README.md in Resources */,
 				BB696ED421F016D100116608 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
