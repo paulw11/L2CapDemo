@@ -17,6 +17,12 @@
 		BB696ED921F016D200116608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB696ED721F016D200116608 /* LaunchScreen.storyboard */; };
 		BB696EE121F0180700116608 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696EE021F0180700116608 /* Constants.swift */; };
 		BB696EE321F035E400116608 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB696EE221F035E400116608 /* DataExtensions.swift */; };
+		BBDFB3A023AC4EA300D93C0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDFB39F23AC4EA300D93C0F /* AppDelegate.swift */; };
+		BBDFB3A223AC4EA300D93C0F /* CentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDFB3A123AC4EA300D93C0F /* CentralViewController.swift */; };
+		BBDFB3A423AC4EA600D93C0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDFB3A323AC4EA600D93C0F /* Assets.xcassets */; };
+		BBDFB3A723AC4EA600D93C0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBDFB3A523AC4EA600D93C0F /* Main.storyboard */; };
+		BBDFB3AF23AC6D4900D93C0F /* L2Cap in Frameworks */ = {isa = PBXBuildFile; productRef = BBDFB3AE23AC6D4900D93C0F /* L2Cap */; };
+		BBDFB3B223ACC81900D93C0F /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDFB3B123ACC81900D93C0F /* PeripheralViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +37,14 @@
 		BB696EDA21F016D200116608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB696EE021F0180700116608 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BB696EE221F035E400116608 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
-		BBD86D2A2324E81300346105 /* L2CapDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = L2CapDemo.entitlements; sourceTree = "<group>"; };
+		BBDFB39D23AC4EA300D93C0F /* L2CapDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = L2CapDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBDFB39F23AC4EA300D93C0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BBDFB3A123AC4EA300D93C0F /* CentralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralViewController.swift; sourceTree = "<group>"; };
+		BBDFB3A323AC4EA600D93C0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBDFB3A623AC4EA600D93C0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BBDFB3A823AC4EA600D93C0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBDFB3B023ACC78800D93C0F /* L2CapDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = L2CapDemo.entitlements; sourceTree = "<group>"; };
+		BBDFB3B123ACC81900D93C0F /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBDFB39A23AC4EA300D93C0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBDFB3AF23AC6D4900D93C0F /* L2Cap in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -51,7 +72,9 @@
 			children = (
 				BB43BB5723A9CE7D005F67A4 /* README.md */,
 				BB696ECB21F016D100116608 /* L2CapDemo */,
+				BBDFB39E23AC4EA300D93C0F /* L2CapDemoMac */,
 				BB696ECA21F016D100116608 /* Products */,
+				BBDFB3AD23AC6D4900D93C0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				BB696EC921F016D100116608 /* L2CapDemo.app */,
+				BBDFB39D23AC4EA300D93C0F /* L2CapDemoMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,7 +90,7 @@
 		BB696ECB21F016D100116608 /* L2CapDemo */ = {
 			isa = PBXGroup;
 			children = (
-				BBD86D2A2324E81300346105 /* L2CapDemo.entitlements */,
+				BBDFB3B023ACC78800D93C0F /* L2CapDemo.entitlements */,
 				BB696ECC21F016D100116608 /* AppDelegate.swift */,
 				BB696ECE21F016D100116608 /* CentralViewController.swift */,
 				BB696ED021F016D100116608 /* PeripheralViewController.swift */,
@@ -78,6 +102,26 @@
 				BB696EE021F0180700116608 /* Constants.swift */,
 			);
 			path = L2CapDemo;
+			sourceTree = "<group>";
+		};
+		BBDFB39E23AC4EA300D93C0F /* L2CapDemoMac */ = {
+			isa = PBXGroup;
+			children = (
+				BBDFB39F23AC4EA300D93C0F /* AppDelegate.swift */,
+				BBDFB3A123AC4EA300D93C0F /* CentralViewController.swift */,
+				BBDFB3B123ACC81900D93C0F /* PeripheralViewController.swift */,
+				BBDFB3A323AC4EA600D93C0F /* Assets.xcassets */,
+				BBDFB3A523AC4EA600D93C0F /* Main.storyboard */,
+				BBDFB3A823AC4EA600D93C0F /* Info.plist */,
+			);
+			path = L2CapDemoMac;
+			sourceTree = "<group>";
+		};
+		BBDFB3AD23AC6D4900D93C0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,19 +147,42 @@
 			productReference = BB696EC921F016D100116608 /* L2CapDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BBDFB39C23AC4EA300D93C0F /* L2CapDemoMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBDFB3AC23AC4EA600D93C0F /* Build configuration list for PBXNativeTarget "L2CapDemoMac" */;
+			buildPhases = (
+				BBDFB39923AC4EA300D93C0F /* Sources */,
+				BBDFB39A23AC4EA300D93C0F /* Frameworks */,
+				BBDFB39B23AC4EA300D93C0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = L2CapDemoMac;
+			packageProductDependencies = (
+				BBDFB3AE23AC6D4900D93C0F /* L2Cap */,
+			);
+			productName = L2CapDemoMac;
+			productReference = BBDFB39D23AC4EA300D93C0F /* L2CapDemoMac.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		BB696EC121F016D100116608 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Paul Wilkinson";
 				TargetAttributes = {
 					BB696EC821F016D100116608 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1130;
+					};
+					BBDFB39C23AC4EA300D93C0F = {
+						CreatedOnToolsVersion = 11.3;
 					};
 				};
 			};
@@ -136,6 +203,7 @@
 			projectRoot = "";
 			targets = (
 				BB696EC821F016D100116608 /* L2CapDemo */,
+				BBDFB39C23AC4EA300D93C0F /* L2CapDemoMac */,
 			);
 		};
 /* End PBXProject section */
@@ -152,6 +220,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBDFB39B23AC4EA300D93C0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBDFB3A423AC4EA600D93C0F /* Assets.xcassets in Resources */,
+				BBDFB3A723AC4EA600D93C0F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -164,6 +241,16 @@
 				BB696ECF21F016D100116608 /* CentralViewController.swift in Sources */,
 				BB696EE321F035E400116608 /* DataExtensions.swift in Sources */,
 				BB696EE121F0180700116608 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBDFB39923AC4EA300D93C0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBDFB3A223AC4EA300D93C0F /* CentralViewController.swift in Sources */,
+				BBDFB3B223ACC81900D93C0F /* PeripheralViewController.swift in Sources */,
+				BBDFB3A023AC4EA300D93C0F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +271,14 @@
 				BB696ED821F016D200116608 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BBDFB3A523AC4EA600D93C0F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBDFB3A623AC4EA600D93C0F /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -343,6 +438,52 @@
 			};
 			name = Release;
 		};
+		BBDFB3AA23AC4EA600D93C0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = L2CapDemoMac/L2CapDemoMac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UPP93EJ3U2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = L2CapDemoMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemoMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BBDFB3AB23AC4EA600D93C0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = L2CapDemoMac/L2CapDemoMac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UPP93EJ3U2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = L2CapDemoMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = me.wilko.L2CapDemoMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -364,6 +505,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		BBDFB3AC23AC4EA600D93C0F /* Build configuration list for PBXNativeTarget "L2CapDemoMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBDFB3AA23AC4EA600D93C0F /* Debug */,
+				BBDFB3AB23AC4EA600D93C0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -379,6 +529,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		BB3A7DEA23A3411E0086C9ED /* L2Cap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3A7DE923A3411E0086C9ED /* XCRemoteSwiftPackageReference "L2Cap" */;
+			productName = L2Cap;
+		};
+		BBDFB3AE23AC6D4900D93C0F /* L2Cap */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB3A7DE923A3411E0086C9ED /* XCRemoteSwiftPackageReference "L2Cap" */;
 			productName = L2Cap;

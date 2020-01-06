@@ -1,22 +1,21 @@
 //
-//  FirstViewController.swift
-//  L2CapDemo
+//  ViewController.swift
+//  L2CapDemoMac
 //
-//  Created by Paul Wilkinson on 17/1/19.
+//  Created by Paul Wilkinson on 20/12/19.
 //  Copyright © 2019 Paul Wilkinson. All rights reserved.
 //
 
-import UIKit
+import Cocoa
 import CoreBluetooth
-import ExternalAccessory
 import L2Cap
 
-class CentralViewController: UIViewController {
+class CentralViewController: NSViewController {
     
-    @IBOutlet weak var scanSwitch: UISwitch!
-    @IBOutlet weak var inputText: UITextField!
-    @IBOutlet weak var byteLabel: UILabel!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var scanSwitch: NSSwitch!
+    @IBOutlet weak var inputText: NSTextField!
+    @IBOutlet weak var byteLabel: NSTextField!
+    @IBOutlet weak var sendButton: NSButton!
     
     private var peripheral: CBPeripheral?
     private var connection: L2CapConnection?
@@ -24,23 +23,25 @@ class CentralViewController: UIViewController {
     
     private var l2capCentral: L2CapCentral!
     
-    private var bytesSent = 0 {
-        didSet {
-            self.byteLabel.text = "Bytes sent = \(self.bytesSent)"
-        }
-    }
-    
     private var queueQueue = DispatchQueue(label: "queue queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     
     private var outputData = Data()
     
+    
+    private var bytesSent = 0 {
+        didSet {
+            self.byteLabel.stringValue = "Bytes sent = \(self.bytesSent)"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Do any additional setup after loading the view.
+        
         self.bytesSent = 0
         self.l2capCentral = L2CapCentral()
         self.l2capCentral.discoveredPeripheralCallback = { peripheral in
-            print("Discovered peripheral \(peripheral)")
             self.peripheral = peripheral
             self.l2capCentral.connect(peripheral: peripheral) { connection in
                 self.connection = connection
@@ -55,19 +56,34 @@ class CentralViewController: UIViewController {
                 }
             }
         }
+        self.l2capCentral.disconnectedPeripheralCallBack = { (connection, error) in
+            print("Disconnected \(connection)")
+            if let err = error {
+                print("With error \(err)")
+            }
+        }
     }
     
-    @IBAction func scanSwitched(_ sender: UISwitch) {
-         self.l2capCentral.scan = sender.isOn
+    override var representedObject: Any? {
+        didSet {
+            // Update the view, if already loaded.
+        }
     }
     
-    @IBAction func sendTextTapped(_ sender: UIButton) {
+    @IBAction func scanSwitched(_ sender: NSSwitch) {
+        self.l2capCentral.scan = sender.state == .on
+    }
+    
+    @IBAction func sendTextTapped(_ sender: NSButton) {
         guard let connection = self.connection else {
             return
         }
-        if let text = self.inputText.text, let data = text.data(using: .utf8) {
+        let text = self.inputText.stringValue
+        if let data = text.data(using: .utf8) {
             connection.send(data: data)
         }
     }
-}
     
+    
+}
+
