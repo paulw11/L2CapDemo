@@ -13,6 +13,7 @@ import L2Cap
 class PeripheralViewController: UIViewController {
     
     @IBOutlet weak var advertiseSwitch: UISwitch!
+    @IBOutlet weak var publishSwitch: UISwitch!
     @IBOutlet weak var outputLabel: UILabel!
     
     private var peripheral: L2CapPeripheral!
@@ -45,5 +46,10 @@ class PeripheralViewController: UIViewController {
     
     @IBAction func advertiseSwitched(_ sender: UISwitch) {
       self.peripheral.publish = sender.isOn
+        self.publishSwitch.isOn = sender.isOn
+    }
+    
+    @IBAction func publishSwitched(_ sender: UISwitch) {
+        self.peripheral.publishChannel = sender.isOn
     }
 }

@@ -17,6 +17,7 @@ class CentralViewController: UIViewController {
     @IBOutlet weak var inputText: UITextField!
     @IBOutlet weak var byteLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var stateLabel: UILabel!
     
     private var peripheral: CBPeripheral?
     private var connection: L2CapConnection?
@@ -42,16 +43,53 @@ class CentralViewController: UIViewController {
         self.l2capCentral.discoveredPeripheralCallback = { peripheral in
             print("Discovered peripheral \(peripheral)")
             self.peripheral = peripheral
-            self.l2capCentral.connect(peripheral: peripheral) { connection in
-                self.connection = connection
-                self.connection?.receiveCallback = { (connection,data) in
-                    print("Received data")
-                }
-                self.connection?.sentDataCallback = { (connection, count) in
-                    self.bytesSent += count
-                }
-                DispatchQueue.main.async {
-                    self.sendButton.isEnabled = true
+            self.connect(peripheral: peripheral)
+        }
+        
+        self.l2capCentral.disconnectedPeripheralCallBack = { (connection,error) in
+            print("\(connection) disconnected")
+            if let error = error {
+                print("\(error)")
+            }
+            self.connection = nil
+            if let peripheral = self.peripheral {
+                print("Reconnecting to \(peripheral)...")
+                self.connect(peripheral: peripheral)
+            }
+        }
+    }
+    
+    private func connect(peripheral: CBPeripheral) {
+        self.l2capCentral.connect(peripheral: peripheral) { connection in
+            self.connection = connection
+            self.connection?.receiveCallback = { (connection,data) in
+                print("Received data")
+            }
+            self.connection?.sentDataCallback = { (connection, count) in
+                self.bytesSent += count
+            }
+            DispatchQueue.main.async {
+                self.sendButton.isEnabled = true
+            }
+            self.connection?.stateChangeCallback = { (connection, eventCode) in
+                switch eventCode {
+                case Stream.Event.openCompleted:
+                    self.stateLabel.text = "Stream is open"
+                case Stream.Event.endEncountered:
+                    self.stateLabel.text = "End encountered"
+                    self.connection?.close()
+                    self.connection = nil
+                    break
+                case Stream.Event.hasBytesAvailable:
+                    break
+                case Stream.Event.hasSpaceAvailable:
+                    break
+                case Stream.Event.errorOccurred:
+                    self.stateLabel.text = "Stream error"
+                    self.connection?.close()
+                    self.connection = nil
+                default:
+                    self.stateLabel.text = "Unknown stream event"
                 }
             }
         }
